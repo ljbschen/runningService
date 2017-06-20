@@ -1,20 +1,18 @@
 package demo.service;
 
 import demo.domain.SimulatorRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 public class RequestGenerator implements Runnable {
+    private static final int TIMEOUT = 5000;
+
     private List<Point> points;
     private SimulatorRequest simulatorRequest;
-
-    @Autowired
-    private ClientHttpRequestFactory clientHttpRequestFactory;
 
     public RequestGenerator(List<Point> points, SimulatorRequest simulatorRequest) {
         this.points = points;
@@ -30,22 +28,24 @@ public class RequestGenerator implements Runnable {
 //                // split to small steps
 //
 //            }
-
             SimulatorRequestDto simulatorRequestDto = new SimulatorRequestDto(simulatorRequest, points.get(i));
-
-            String distributedResourceUrl = "";
-            RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
-            HttpEntity<SimulatorRequest> request = new HttpEntity<SimulatorRequest>(simulatorRequest);
-            SimulatorRequest object = restTemplate.postForObject(distributedResourceUrl, request, SimulatorRequest.class);
             try {
+//                String distributedResourceUrl = "http://localhost:9000/index";
+//                RestTemplate restTemplate = new RestTemplate();
+//                HttpEntity<SimulatorRequestDto> request = new HttpEntity<SimulatorRequestDto>(simulatorRequestDto);
+//                restTemplate.setRequestFactory(new SimpleClientHttpRequestFactory());
+//                SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate
+//                        .getRequestFactory();
+//                rf.setReadTimeout(TIMEOUT);
+//                rf.setConnectTimeout(TIMEOUT);
+//                SimulatorRequestDto object = restTemplate.postForObject(distributedResourceUrl, request, SimulatorRequestDto.class);
+                // assertion?
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            System.out.println("finish send the object: " + simulatorRequestDto.getSimulatorRequest().getRunningId());
         }
-    }
-
-    private void sendPost() {
-
     }
 }
