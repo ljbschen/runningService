@@ -1,0 +1,17 @@
+很多同学没有上传.gitignore文件，这在github的使用中非常重要
+REST API的设计原则有两条最重要的很多同学有所疏漏
+URL应该对应resource，不应该包含动词
+用http request type来表示动词
+README应该用markdown写 https://guides.github.com/features/mastering-markdown/
+JSON Response里是不包含某些fields的，我觉得比较好的实现方法有：
+用 jsonignore annotation
+返回调整过的json object
+创建一个类方法手动生成json
+Readme信息不完备，常见的条目有：
+Features
+Dependency 
+Architecture
+Database related design 
+How to deploy
+API设计
+
