@@ -13,10 +13,12 @@ public class RequestGenerator implements Runnable {
 
     private List<Point> points;
     private SimulatorRequest simulatorRequest;
+    private int reportInterval;
 
     public RequestGenerator(List<Point> points, SimulatorRequest simulatorRequest) {
         this.points = points;
         this.simulatorRequest = simulatorRequest;
+        this.reportInterval = simulatorRequest.getReportInterval();
     }
 
     @Override
@@ -30,22 +32,26 @@ public class RequestGenerator implements Runnable {
 //            }
             SimulatorRequestDto simulatorRequestDto = new SimulatorRequestDto(simulatorRequest, points.get(i));
             try {
-//                String distributedResourceUrl = "http://localhost:9000/index";
-//                RestTemplate restTemplate = new RestTemplate();
-//                HttpEntity<SimulatorRequestDto> request = new HttpEntity<SimulatorRequestDto>(simulatorRequestDto);
-//                restTemplate.setRequestFactory(new SimpleClientHttpRequestFactory());
-//                SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate
-//                        .getRequestFactory();
-//                rf.setReadTimeout(TIMEOUT);
-//                rf.setConnectTimeout(TIMEOUT);
-//                SimulatorRequestDto object = restTemplate.postForObject(distributedResourceUrl, request, SimulatorRequestDto.class);
+                String distributedResourceUrl = "http://localhost:9000/distributed/upload";
+                RestTemplate restTemplate = new RestTemplate();
+                HttpEntity<SimulatorRequestDto> request = new HttpEntity<SimulatorRequestDto>(simulatorRequestDto);
+                restTemplate.setRequestFactory(new SimpleClientHttpRequestFactory());
+                SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate
+                        .getRequestFactory();
+                rf.setReadTimeout(TIMEOUT);
+                rf.setConnectTimeout(TIMEOUT);
+                SimulatorRequestDto object = restTemplate.postForObject(distributedResourceUrl, request, SimulatorRequestDto.class);
                 // assertion?
-                Thread.sleep(1000);
+            } catch (Exception e) {
+//                e.printStackTrace();
+                System.out.println("hoho error");
+            }
+            try {
+                Thread.sleep(reportInterval);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("finish send the object: " + simulatorRequestDto.getSimulatorRequest().getRunningId());
+            System.out.println("finish send the object: " + simulatorRequestDto.getRunningId());
         }
     }
 }

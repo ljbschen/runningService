@@ -36,7 +36,7 @@ public class RunningInfoRestController {
         this.runningInfoService.deleteAll();
     }
 
-    @RequestMapping(value = "/runningInfo/deleteByRunningId", method = RequestMethod.GET)
+    @RequestMapping(value = "/runningInfo/deleteByRunningId", method = RequestMethod.DELETE)
     public void deleteByRunningId(@RequestParam(name = "runningId") String runningId) {
         this.runningInfoService.deleteByRunningId(runningId);
     }
