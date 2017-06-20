@@ -38,8 +38,8 @@ public class PolyLineDecoder {
             int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
             lng += dlng;
 
-            Point p = new Point((int) (((double) lat / 1E5) * 1E6),
-                    (int) (((double) lng / 1E5) * 1E6));
+            Point p = new Point((((double) lat / 1E5)),
+                    (((double) lng / 1E5)));
             poly.add(p);
         }
 

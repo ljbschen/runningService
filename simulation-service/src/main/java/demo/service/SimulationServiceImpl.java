@@ -11,7 +11,7 @@ import java.util.List;
 public class SimulationServiceImpl implements SimulationService {
     @Override
     public List<Point> parsePolyline(SimulatorRequest simulatorRequest) {
-        String polyline = simulatorRequest.getEncodedPolyline();
+        String polyline = simulatorRequest.getPolyline();
         PolyLineDecoder decoder = new PolyLineDecoder();
         return decoder.decodePoly(polyline);
     }
@@ -20,8 +20,7 @@ public class SimulationServiceImpl implements SimulationService {
     public void generateLocations(SimulationInfo simulationInfo) {
         for (SimulatorRequest request : simulationInfo.getGpsSimulatorRequests()) {
             List<Point> points = parsePolyline(request);
-            int speed = request.getSpeed();
-            Runnable r = new RequestGenerator(points, speed);
+            Runnable r = new RequestGenerator(points, request);
             new Thread(r).start();
         }
     }

@@ -11,12 +11,12 @@ public class SimulatorRequest {
     }
 
     private String runningId;
-    private int speed;
+    private double speed;
     private boolean move;
     private boolean exportPositionsToMessaging;
     private int reportInterval;
     private int secondsToError;
     private RunnerStatus runnerStatus;
-    private String encodedPolyline;
+    private String polyline;
     private MedicalInfo medicalInfo;
 }

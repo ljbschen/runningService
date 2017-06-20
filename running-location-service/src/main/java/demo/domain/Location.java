@@ -63,10 +63,10 @@ public class Location {
         this.unitInfo = unitInfo;
     }
 
-//    @JsonCreator
-//    public Location(@JsonProperty("RunningId") String runningId) {
-//        this.unitInfo = new UnitInfo(runningId);
-//    }
+    @JsonCreator
+    public Location(@JsonProperty("RunningId") String runningId) {
+        this.unitInfo = new UnitInfo(runningId);
+    }
 
     public String getRunningId() {
         return this.unitInfo == null ? null : this.unitInfo.getRunningId();
