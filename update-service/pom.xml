@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kevin.cs504</groupId>
-    <artifactId>distributed-service</artifactId>
+    <artifactId>update-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -59,4 +59,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

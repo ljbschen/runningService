@@ -42,12 +42,13 @@ public class RequestGenerator implements Runnable {
                 rf.setConnectTimeout(TIMEOUT);
                 SimulatorRequestDto object = restTemplate.postForObject(distributedResourceUrl, request, SimulatorRequestDto.class);
                 // assertion?
+
             } catch (Exception e) {
-//                e.printStackTrace();
-                System.out.println("hoho error");
+                e.printStackTrace();
+//                System.out.println("hoho error");
             }
             try {
-                Thread.sleep(reportInterval);
+                Thread.sleep(reportInterval * 10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
