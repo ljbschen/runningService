@@ -33,6 +33,8 @@ git clone https://github.com/ljbschen/running-info-service.git
 #### 2. run MySQL docker instance
 ```aidl
 docker-compose up
+docker exec -ti containerName mysql -uroot -p
+GRANT ALL PRIVILEGES ON *.* TO 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD' WITH GRANT OPTION;
 ```
 Using MySQL version 5.7.18 with default password ```test```, default port ```3306``` and default databaseName ```running_info```
 
